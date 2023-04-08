@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Ecommerce Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    .product-img {
+      max-height: 400px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 20px;
+    }
+    .product-name {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .product-price {
+      font-size: 20px;
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .product-desc {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    .btn-cart {
+      font-size: 18px;
+      font-weight: bold;
+      background-color: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Product details -->
+<div th:object="${product}" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img th:src="*{thumbnail}" class="product-img">
+    </div>
+    <div class="col-md-6 product-info">
+      <h2 th:text="*{title}" class="product-name"></h2>
+      <h3 th:text="'$' + *{price}" class="product-price"></h3>
+      <p th:text="*{description}" class="product-desc"></p>
+      <a th:href="@{/products/1}" class="btn btn-primary">View Details</a>
+      <button class="btn-cart">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
