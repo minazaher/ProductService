@@ -29,4 +29,7 @@ public class ProductService{
     public List<String> getBrands(){
         return repo.findBrands();
     }
+    public Product getProductsById(Long id) {
+        return repo.findProductById(id);
+    }
 }

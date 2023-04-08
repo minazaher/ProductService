@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 //    @Query("SELECT p FROM products  WHERE p.category = :categoryName")
+
+    Product findProductById(@Param(("id")) Long id);
     List<Product> findByCategory(@Param("categoryName") String categoryName);
     List<Product> findByBrand(@Param("brandName") String brandName);
     @Query("SELECT p FROM products p")

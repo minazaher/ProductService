@@ -20,12 +20,12 @@ import java.util.List;
 public class ProductsController {
     private final RestTemplate restTemplate;
     private final ProductService productService;
+    private final ProductRestController productRestController ;
 
     final String uri = "https://dummyjson.com/products/";
     @GetMapping("/products/{id}")
     public String getProductPage(@PathVariable Long id, Model model) {
-        Product product = restTemplate.getForObject(uri + id, Product.class);
-        System.out.println(product);
+        Product product = productRestController.getProductById(id);
         model.addAttribute("product", product);
         return "single-product";
     }
