@@ -14,10 +14,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findProductById(@Param(("id")) Long id);
     List<Product> findByCategory(@Param("categoryName") String categoryName);
+
     List<Product> findByBrand(@Param("brandName") String brandName);
     @Query("SELECT p FROM products p")
     List<Product> findAllProducts();
-    @Query("Select DISTINCT category from products")
+    @Query(value = "Select DISTINCT category from products")
     List<String> findCategories();
     @Query("Select DISTINCT brand from products")
     List<String> findBrands();

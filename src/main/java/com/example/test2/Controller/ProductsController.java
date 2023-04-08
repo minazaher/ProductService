@@ -16,27 +16,28 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/api/")
+@RequestMapping("/shop/")
 public class ProductsController {
     private final RestTemplate restTemplate;
     private final ProductService productService;
     private final ProductRestController productRestController ;
+    List<Product> products = new ArrayList<>();
 
     final String uri = "https://dummyjson.com/products/";
-    @GetMapping("/products/{id}")
-    public String getProductPage(@PathVariable Long id, Model model) {
+    @GetMapping("/products/{category}/{id}")
+    public String getProductPage(@PathVariable Long id,@PathVariable String category, Model model) {
         Product product = productRestController.getProductById(id);
+        category = product.getCategory();
         model.addAttribute("product", product);
         return "single-product";
     }
 
-
     @GetMapping("/products")
     public String getProductsByCategory(@RequestParam(value = "category", required = false, defaultValue = "all") String category,
                                                         Model model) {
-        List<Product> products = new ArrayList<>();
         List<String> categories = productService.getCategories();
         List<String> brands = productService.getBrands();
+
         if (category.equals("all"))
             products = productService.getAllProducts();
         else
@@ -48,17 +49,16 @@ public class ProductsController {
         return "category";
     }
 
-
     @GetMapping("/product")
-    public String getProductsByBrand(@RequestParam(value = "brand", required = false, defaultValue = "all") String brand
+    public String getProductsByBrand(@RequestParam(value = "brand", required = false) String brand
                                         ,Model model) {
-        List<Product> products = new ArrayList<>();
         List<String> categories = productService.getCategories();
         List<String> brands = productService.getBrands();
-        if (brands.equals("all"))
-            products = productService.getAllProducts();
-        else
+
+        if (brand != null){
             products = productService.getProductsByBrand(brand);
+        }
+
         model.addAttribute("brands", brands);
         model.addAttribute("categories", categories);
         model.addAttribute("products", products);
