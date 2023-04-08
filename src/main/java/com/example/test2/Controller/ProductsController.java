@@ -25,11 +25,23 @@ public class ProductsController {
 
     final String uri = "https://dummyjson.com/products/";
     @GetMapping("/products/{category}/{id}")
-    public String getProductPage(@PathVariable Long id,@PathVariable String category, Model model) {
+    public String getProductCategory(@PathVariable Long id,@PathVariable String category, Model model) {
         Product product = productRestController.getProductById(id);
         category = product.getCategory();
         model.addAttribute("product", product);
         return "single-product";
+    }
+
+    @GetMapping("/products/{page}")
+    public String getShop(@PathVariable Long page, Model model){
+        products = productRestController.getProductsPage(page ,page+1);
+        List<String> categories = productService.getCategories();
+        List<String> brands = productService.getBrands();
+
+        model.addAttribute("brands", brands);
+        model.addAttribute("categories", categories);
+        model.addAttribute("products", products);
+        return "category";
     }
 
     @GetMapping("/products")
@@ -58,7 +70,6 @@ public class ProductsController {
         if (brand != null){
             products = productService.getProductsByBrand(brand);
         }
-
         model.addAttribute("brands", brands);
         model.addAttribute("categories", categories);
         model.addAttribute("products", products);

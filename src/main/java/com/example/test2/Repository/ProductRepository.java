@@ -10,11 +10,11 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-//    @Query("SELECT p FROM products  WHERE p.category = :categoryName")
 
+
+//    @Query("SELECT p FROM products  WHERE p.category = :categoryName")
     Product findProductById(@Param(("id")) Long id);
     List<Product> findByCategory(@Param("categoryName") String categoryName);
-
     List<Product> findByBrand(@Param("brandName") String brandName);
     @Query("SELECT p FROM products p")
     List<Product> findAllProducts();
@@ -22,5 +22,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<String> findCategories();
     @Query("Select DISTINCT brand from products")
     List<String> findBrands();
-
+    @Query("select p from products p where p.id < 10 * :page and p.id > 10 * :i")
+    List<Product> findProductsPage(long i ,Long page);
 }

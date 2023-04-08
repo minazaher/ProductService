@@ -33,4 +33,8 @@ public class ProductService{
     public Product getProductsById(Long id) {
         return repo.findProductById(id);
     }
+
+    public List<Product> getProductsPage(long i, Long page) {
+        return repo.findProductsPage(page -1 , page);
+    }
 }
