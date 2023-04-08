@@ -66,21 +66,4 @@ public class ProductsController {
     }
 
 
-    //    @GetMapping("/products")
-//    public String getProducts(Model model) {
-//        List<Product> products = new ArrayList<>();
-//        ArrayList<String> categories = new ArrayList<>();
-//        for (int i = 1; i < 20; i++) {
-//            Product product = restTemplate.getForObject(uri+i , Product.class);
-//            products.add(product);
-//            if (!categories.contains(product.getCategory())){
-//                categories.add(product.getCategory());
-//            }
-//        }
-//        model.addAttribute("categories", categories);
-//        model.addAttribute("products", products);
-//        return "category";
-//    }
-
-
 }
